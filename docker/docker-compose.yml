@@ -1,0 +1,24 @@
+version: '3'
+
+services:
+  backend:
+    restart: always
+    volumes:
+      - ../backend:/app
+    env_file: ../backend/.env
+    build:
+      context: ../backend
+      dockerfile: Dockerfile
+    container_name: backend-ai
+    ports:
+      - "5001:5001"
+
+  frontend:
+    build:
+      context: ../frontend
+      dockerfile: Dockerfile
+    volumes:
+      - ../frontend/src:/app/src
+    container_name: frontend-ai
+    ports:
+      - "5173:5173"
